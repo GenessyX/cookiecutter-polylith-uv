@@ -1,0 +1,54 @@
+ci:
+  autoupdate_schedule: weekly
+  skip: []
+  submodules: false
+
+exclude: docs|node_modules|migrations|.git|.tox
+fail_fast: false
+
+default_language_version:
+  python: python3.12
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: ^.*\.md$
+      - id: end-of-file-fixer
+        exclude: ^.*snapshots.*$
+      - id: mixed-line-ending
+        args: [--fix=lf]
+      - id: detect-private-key
+      - id: detect-aws-credentials
+        args: [--allow-missing-credentials]
+      - id: check-merge-conflict
+      - id: check-yaml
+        name: Check YAML
+        exclude: ^charts/|^helm/
+
+  - repo: https://github.com/ComPWA/taplo-pre-commit
+    rev: v0.9.3
+    hooks:
+      - id: taplo-format
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.8.4
+    hooks:
+      - id: ruff
+        args: [ --fix ]
+      - id: ruff-format
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: 'v1.14.0'  # Use the sha / tag you want to point at
+    hooks:
+      - id: mypy
+        args: [--strict]
+        additional_dependencies:
+
+  - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
+    rev: v9.20.0
+    hooks:
+      - id: commitlint
+        stages: [commit-msg]
+        additional_dependencies: ['@commitlint/config-angular']

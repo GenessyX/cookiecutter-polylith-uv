@@ -1,0 +1,147 @@
+[project]
+name = "{{ cookiecutter.project_name.lower().replace(' ', '-') }}"
+version = "0.1.0"
+description = "{{ cookiecutter.project_description }}"
+authors = [
+    { name = "{{ cookiecutter.author }}", email = "{{ cookiecutter.author_email }}" },
+]
+dependencies = []
+readme = "README.md"
+requires-python = ">= 3.12"
+
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.uv]
+managed = true
+
+
+[dependency-groups]
+types = ["mypy>=1.14.0"]
+tests = [
+    "pytest-sugar>=1.0.0",
+    "pytest>=8.3.4",
+    "pytest-asyncio>=0.25.0",
+    "freezegun>=1.5.1",
+    "coverage>=7.6.9",
+    "pytest-dotenv>=0.5.2",
+    "sqlalchemy-utils>=0.41.2",
+    "fakeredis>=2.26.2",
+    "polyfactory>=2.18.1",
+    "faker>=33.1.0",
+    "pytest-alembic>=0.11.1",
+]
+lint = [
+    "poethepoet>=0.31.1",
+    "polylith-cli>=1.24.0",
+    "pre-commit>=4.0.1",
+    "ruff>=0.8.4",
+]
+docs = ["mkdocs-material>=9.5.49", "mkdocs>=1.6.1"]
+
+[tool.poe.tasks.html-cov]
+sequence = ["coverage erase", "coverage run", "coverage html -i"]
+default_item_type = "cmd"
+
+[tool.poe.tasks.poly-check]
+cmd = "poly check"
+
+[tool.poe.tasks]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build]
+dev-mode-dirs = ["components", "bases", "development", "."]
+
+[tool.hatch.envs.default]
+dependencies = ["polylith-cli"]
+type = "virtual"
+path = ".venv"
+python = "3.12"
+
+[tool.pyright]
+typeCheckingMode = "standard"
+extraPaths = ["bases", "components"]
+reportImplicitAbstractClass = true
+
+[tool.mypy]
+overrides = []
+python_version = "3.12"
+mypy_path = ["components", "bases"]
+namespace_packages = true
+explicit_package_bases = true
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+
+[tool.ruff.lint.isort]
+known-first-party = ["jobski"]
+
+[tool.ruff.lint]
+allowed-confusables = [
+    "а",
+    "А",
+    "б",
+    "Б",
+    "в",
+    "В",
+    "г",
+    "Г",
+    "е",
+    "Е",
+    "з",
+    "З",
+    "и",
+    "И",
+    "к",
+    "К",
+    "м",
+    "М",
+    "н",
+    "Н",
+    "о",
+    "О",
+    "р",
+    "Р",
+    "с",
+    "С",
+    "у",
+    "У",
+    "ф",
+    "Ф",
+    "х",
+    "Х",
+]
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+select = ["ALL"]
+ignore = ["D", "TD002", "TD003", "EXE", "ERA", "FIX", "INP001", "UP037"]
+fixable = ["ALL"]
+unfixable = []
+flake8-quotes = { inline-quotes = 'double', multiline-quotes = 'double' }
+
+[tool.ruff.format]
+quote-style = 'double'
+
+[tool.ruff.lint.extend-per-file-ignores]
+"test/**/*.py" = ["S101", "S106", "S105", "S311", "PLR2004", "FBT001"]
+"components/jobski/head_hunter/models.py" = ["S105"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "session"
+env_files = ["test/.env"]
+addopts = "-m 'not migrations'"
+
+[tool.coverage.run]
+source = ["."]
+relative_files = true
+command_line = "-m pytest test --junitxml=pytest-report.xml"
+concurrency = ["greenlet"]
+omit = ["test/*", "bases/jobski/consumer/core.py", "bases/jobski/admin/core.py"]
+
+[tool.polylith.bricks]
