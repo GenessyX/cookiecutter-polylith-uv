@@ -45,14 +45,14 @@ repos:
       - id: mypy
         args: [--strict]
         additional_dependencies:
-        {% if cookiecutter.sample_project %}
+        {%- if cookiecutter.sample_project %}
           - pydantic
           - pydantic-settings
-        {% endif %}
-        {% if cookiecutter.persistence_component %}
+        {%- endif %}
+        {%- if cookiecutter.persistence_component %}
           - sqlalchemy
           - alembic
-        {% endif %}
+        {%- endif %}
 
   - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
     rev: v9.20.0
