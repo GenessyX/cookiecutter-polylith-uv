@@ -1,6 +1,7 @@
 import sys
 import subprocess
 import logging
+from typing import cast
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
@@ -8,6 +9,16 @@ logging.basicConfig(level=logging.INFO)
 
 def setup_repository() -> None:
     try:
+        subprocess.run(
+            ["git", "config", "user.email", "{{ cookiecutter.author_email }}"],
+            capture_output=True,
+            check=True,
+        )
+        subprocess.run(
+            ["git", "config", "user.name", "{{ cookiecutter.author }}"],
+            capture_output=True,
+            check=True,
+        )
         result = subprocess.run(["git", "init"], capture_output=True, check=True)
         logger.info("Set up repository: %s", result.stdout.decode("utf-8"))
     except Exception:
@@ -27,7 +38,9 @@ def setup_dependencies() -> None:
 def setup_pre_commit() -> None:
     try:
         result = subprocess.run(
-            ["uv", "run", "pre-commit", "install"], capture_output=True, check=True
+            ["uv", "run", "pre-commit", "install"],
+            capture_output=True,
+            check=True,
         )
         logger.info("Set up basic pre-commit hooks: %s", result.stdout.decode("utf-8"))
         result = subprocess.run(
@@ -68,7 +81,8 @@ def produce_first_commit() -> None:
         logger.info("Produced first commit: %s", result.stdout.decode("utf-8"))
     except subprocess.CalledProcessError as err:
         logger.exception(
-            "Failed to produce first commit: \n" + err.stderr.decode("utf-8")
+            "Failed to produce first commit: \n"
+            + cast(bytes, err.stderr).decode("utf-8")
         )
         sys.exit(1)
 
