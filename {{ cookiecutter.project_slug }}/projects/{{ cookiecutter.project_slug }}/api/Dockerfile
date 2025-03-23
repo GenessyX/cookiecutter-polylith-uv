@@ -17,7 +17,9 @@ RUN uv pip install --system --no-cache-dir /app/$wheel
 
 COPY ./run.py /app/run.py
 
+{%- if cookiecutter.persistence_component %}
 COPY ./alembic.ini /app/alembic.ini
 COPY ./alembic /app/alembic
+{%- endif %}
 
 CMD ["python", "run.py"]
