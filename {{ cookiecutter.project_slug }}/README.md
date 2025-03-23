@@ -11,5 +11,5 @@ uv run pre-commit install --hook-type commit-msg
 ## coverage
 
 ```bash
-uv run html-cov
+uv run poe html-cov
 ```
