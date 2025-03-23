@@ -3,7 +3,7 @@ import shutil
 import sys
 import subprocess
 import logging
-from typing import cast
+from typing import Literal, cast
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
@@ -114,10 +114,27 @@ def rm_sample_components() -> None:
     if not sample_project_enabled and not persistence_component_enabled:
         shutil.rmtree(Path("components/{{ cookiecutter.project_slug }}/settings"))
 
+License = Literal["GPL-3.0", "MIT", "Proprietary"]
+license: License = {% if cookiecutter.license == "GPL-3.0" %} "GPL-3.0" {% elif cookiecutter.license == "MIT" %} "MIT" {% else %} "Proprietary"
+
+def setup_license() -> None:
+    match license:
+        case "GPL-3.0":
+            Path("LICENSE_GPL").rename("LICENSE")
+            Path("LICENSE_MIT").unlink()
+        case "MIT":
+            Path("LICENSE_MIT").rename("LICENSE")
+            Path("LICENSE_GPL").unlink()
+        case "Proprietary":
+            Path("LICENSE_GPL").unlink()
+            Path("LICENSE_MIT").unlink()
+
+
 if __name__ == "__main__":
     setup_repository()
     setup_dependencies()
     setup_pre_commit()
     rm_sample_components()
+    setup_license()
     produce_first_commit()
     setup_local_env()
