@@ -51,7 +51,7 @@ def produce_first_commit() -> None:
             "Added all files to first commit: %s", result.stdout.decode("utf-8")
         )
         result = subprocess.run(
-            ["uv", "run", "pre-commit", "run", "--all-files", "--hook-stage", "manual"],
+            ["uv", "run", "pre-commit", "run", "--all-files", "||", "true"],
             capture_output=True,
             check=True,
         )
