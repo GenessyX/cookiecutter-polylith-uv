@@ -1,5 +1,11 @@
 # {{ cookiecutter.project_name }}
 
+## project build
+
+```bash
+cd projects/{{project_name}}
+uv build --wheel
+```
 
 ## pre-commit
 
