@@ -106,13 +106,16 @@ def rm_sample_components() -> None:
     if not sample_project_enabled:
         shutil.rmtree(Path("bases/{{ cookiecutter.project_slug }}/api"))
         shutil.rmtree(Path("projects/{{ cookiecutter.project_slug }}/api"))
+        shutil.rmtree(Path("test/bases/{{ cookiecutter.project_slug }}/api"))
     if not persistence_component_enabled:
         shutil.rmtree( Path("components/{{ cookiecutter.project_slug }}/persistence"))
+        shutil.rmtree( Path("test/components/{{ cookiecutter.project_slug }}/persistence"))
         if sample_project_enabled:
             shutil.rmtree(Path("projects/{{ cookiecutter.project_slug }}/api/alembic"))
             Path("projects/{{ cookiecutter.project_slug }}/api/alembic.ini").unlink()
     if not sample_project_enabled and not persistence_component_enabled:
         shutil.rmtree(Path("components/{{ cookiecutter.project_slug }}/settings"))
+        shutil.rmtree( Path("test/components/{{ cookiecutter.project_slug }}/settings"))
 
 License = Literal["GPL-3.0", "MIT", "Proprietary"]
 license: License = {% if cookiecutter.license == "GPL-3.0" %} "GPL-3.0" {% elif cookiecutter.license == "MIT" %} "MIT" {% else %} "Proprietary" {% endif %}
