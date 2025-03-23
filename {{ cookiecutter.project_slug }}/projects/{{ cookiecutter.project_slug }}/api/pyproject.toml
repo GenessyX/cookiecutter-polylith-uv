@@ -12,7 +12,16 @@ authors = [
 
 requires-python = ">= 3.12"
 
-dependencies = []
+dependencies = [
+  {% if cookiecutter.sample_project %}
+  "pydantic>=2.10.3",
+  "pydantic-settings>=2.7.0",
+  {% endif %}
+  {% if cookiecutter.persistence_component %}
+  "sqlalchemy>=2.0.36",
+  "alembic>=1.14.0",
+  {% endif %}
+]
 
 [tool.hatch.build]
 dev-mode-dirs = ["../../components", "../../bases"]
