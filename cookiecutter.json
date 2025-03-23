@@ -5,5 +5,7 @@
   "author": "Anonymous",
   "author_email": "email@example.com",
   "python_version": "3.12.6",
-  "license": ["GPL-3.0", "MIT", "Proprietary"]
+  "license": ["GPL-3.0", "MIT", "Proprietary"],
+  "sample_project": true,
+  "persistence_component": true
 }

@@ -1,3 +1,4 @@
+from pathlib import Path
 import sys
 import subprocess
 import logging
@@ -85,6 +86,13 @@ def produce_first_commit() -> None:
             + cast(bytes, err.stderr).decode("utf-8")
         )
         sys.exit(1)
+
+sample_project_enabled = {% if cookiecutter.sample_project %} True {% else %} False {% endif %}
+
+def setup_local_env() -> None:
+    if sample_project_enabled:
+        with Path("bases/{{ cookiecutter.project_slug }}/api/local.env").open("w"):
+            pass
 
 
 if __name__ == "__main__":
