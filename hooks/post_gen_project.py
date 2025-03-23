@@ -105,14 +105,14 @@ def setup_local_env() -> None:
 def rm_sample_components() -> None:
     if not sample_project_enabled:
         shutil.rmtree(Path("bases/{{ cookiecutter.project_slug }}/api"))
-        shutil.rmtree(Path("projects/{{ cookiecutter.project_slug }}/api"))
+        shutil.rmtree(Path("projects/api"))
         shutil.rmtree(Path("test/bases/{{ cookiecutter.project_slug }}/api"))
     if not persistence_component_enabled:
         shutil.rmtree( Path("components/{{ cookiecutter.project_slug }}/persistence"))
         shutil.rmtree( Path("test/components/{{ cookiecutter.project_slug }}/persistence"))
         if sample_project_enabled:
-            shutil.rmtree(Path("projects/{{ cookiecutter.project_slug }}/api/alembic"))
-            Path("projects/{{ cookiecutter.project_slug }}/api/alembic.ini").unlink()
+            shutil.rmtree(Path("projects/api/alembic"))
+            Path("projects/api/alembic.ini").unlink()
     if not sample_project_enabled and not persistence_component_enabled:
         shutil.rmtree(Path("components/{{ cookiecutter.project_slug }}/settings"))
         shutil.rmtree( Path("test/components/{{ cookiecutter.project_slug }}/settings"))
