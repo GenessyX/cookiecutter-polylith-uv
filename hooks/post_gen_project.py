@@ -140,12 +140,18 @@ def setup_docker_compose() -> None:
     if not sample_project_enabled:
         Path("docker.env").unlink()
 
+
+def setup_sample_project() -> None:
+    if sample_project_enabled:
+        subprocess.run(["uv", "lock"], cwd=Path("projects/api"), capture_output=True, check=True)
+
 if __name__ == "__main__":
     setup_repository()
     setup_dependencies()
     setup_pre_commit()
     rm_sample_components()
     setup_docker_compose()
+    setup_sample_project()
     setup_license()
     produce_first_commit()
     setup_local_env()
