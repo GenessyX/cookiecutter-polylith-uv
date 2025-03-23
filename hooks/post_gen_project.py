@@ -53,7 +53,12 @@ def setup_pre_commit() -> None:
         logger.info(
             "Set up commit-msg pre-commit hooks: %s", result.stdout.decode("utf-8")
         )
-
+        result = subprocess.run(
+            ["uv", "run", "pre-commit", "autoupdate"],
+            capture_output=True,
+            check=True
+        )
+        logger.info("Updated pre-commit hooks to latest version")
     except Exception:
         logger.exception("Failed to set up pre-commit hooks")
         sys.exit(1)
