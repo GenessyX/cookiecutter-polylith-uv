@@ -3,7 +3,7 @@
 ## project build
 
 ```bash
-cd projects/{{project_name}}
+cd projects/{project_name}
 uv build --wheel
 ```
 
