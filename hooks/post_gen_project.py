@@ -50,18 +50,22 @@ def produce_first_commit() -> None:
         logger.info(
             "Added all files to first commit: %s", result.stdout.decode("utf-8")
         )
-        # result = subprocess.run(
-        #     ["uv", "run", "pre-commit", "run", "--all-files"],
-        #     capture_output=True,
-        #     check=True,
-        # )
-        # logger.info("Ran pre-commit on repo: %s", result.stdout.decode("utf-8"))
-        # result = subprocess.run(
-        #     ["git", "commit", "-m", "chore: first commit"],
-        #     capture_output=True,
-        #     check=True,
-        # )
-        # logger.info("Produced first commit: %s", result.stdout.decode("utf-8"))
+        result = subprocess.run(
+            ["uv", "run", "pre-commit", "run", "--all-files", "--hook-stage", "manual"],
+            capture_output=True,
+            check=True,
+        )
+        logger.info("Ran pre-commit on repo: %s", result.stdout.decode("utf-8"))
+        result = subprocess.run(["git", "add", "."], capture_output=True, check=True)
+        logger.info(
+            "Added all files to first commit: %s", result.stdout.decode("utf-8")
+        )
+        result = subprocess.run(
+            ["git", "commit", "-m", "chore: first commit"],
+            capture_output=True,
+            check=True,
+        )
+        logger.info("Produced first commit: %s", result.stdout.decode("utf-8"))
     except subprocess.CalledProcessError as err:
         logger.exception(
             "Failed to produce first commit: \n" + err.stderr.decode("utf-8")
