@@ -100,3 +100,4 @@ if __name__ == "__main__":
     setup_dependencies()
     setup_pre_commit()
     produce_first_commit()
+    setup_local_env()
