@@ -7,5 +7,6 @@
   "python_version": "3.12.6",
   "license": ["GPL-3.0", "MIT", "Proprietary"],
   "sample_project": true,
-  "persistence_component": true
+  "persistence_component": true,
+  "pyright": ["basedpyright", "pyright"]
 }
