@@ -3,7 +3,7 @@ from typing import Literal
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-from {{ cookiecutter.project_slug }}.persistence.rdb.settings import DatabaseSettings
+from {{ cookiecutter.project_slug }}.persistence.settings import DatabaseSettings
 
 APP_ROOT = Path(__file__).parent.parent
 
