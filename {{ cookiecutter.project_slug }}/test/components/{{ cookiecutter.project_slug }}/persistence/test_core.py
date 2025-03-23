@@ -1,4 +1,4 @@
-from {{ cookiecutter.project_name }}.persistence import core
+from {{ cookiecutter.project_slug }}.persistence import core
 
 def test_sample() -> None:
     assert core is not None
