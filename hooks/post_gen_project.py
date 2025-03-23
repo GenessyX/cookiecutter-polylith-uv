@@ -99,4 +99,4 @@ if __name__ == "__main__":
     setup_repository()
     setup_dependencies()
     setup_pre_commit()
-    # produce_first_commit()
+    produce_first_commit()
