@@ -56,7 +56,7 @@ def produce_first_commit() -> None:
         )
         logger.info("Produced first commit: %s", result.stdout.decode("utf-8"))
     except subprocess.CalledProcessError as err:
-        logger.exception("Failed to produce first commit: %s", err.stderr)
+        logger.exception("Failed to produce first commit: \n" + err.stderr)
         sys.exit(1)
 
 
