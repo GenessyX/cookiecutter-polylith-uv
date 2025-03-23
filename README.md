@@ -27,5 +27,7 @@ Answer the questions and ready to go.
     - GPL-3.0 (**default**) 
     - MIT 
     - Proprietary
-8. Optionally set up sample project named `api` with `Dockerfile` and `pyproject.toml` set up.
-9. Optionally set up persistence component (`sqlalchemy`, `alembic`) + set up alembic directory in sample project `api`.
+8. Testing and coverage with [`pytest`](https://github.com/pytest-dev/pytest) and [`coverage`](https://github.com/nedbat/coveragepy).
+9. Task runner [`poethepoet`](https://github.com/nat-n/poethepoet) with set up tasks for coverage (html) and poly check.
+10. Optionally set up sample project named `api` with `Dockerfile` and `pyproject.toml` set up.
+11. Optionally set up persistence component (`sqlalchemy`, `alembic`) + set up alembic directory in sample project `api`.
