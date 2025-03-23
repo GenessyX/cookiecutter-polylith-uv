@@ -48,6 +48,10 @@ repos:
         {%- if cookiecutter.sample_project %}
           - pydantic
           - pydantic-settings
+          - granian
+          - uvicorn
+          - fastapi
+          - uvloop
         {%- endif %}
         {%- if cookiecutter.persistence_component %}
           - sqlalchemy
