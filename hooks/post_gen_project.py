@@ -43,7 +43,17 @@ def setup_pre_commit() -> None:
         sys.exit(1)
 
 
+def produce_first_commit() -> None:
+    try:
+        result = subprocess.run(["git", "commit", "-m", "chore: first commit"])
+        logger.info("Produced first commit: %s", result.stdout.decode("utf-8"))
+    except Exception:
+        logger.exception("Failed to produce first commit")
+        sys.exit(1)
+
+
 if __name__ == "__main__":
     setup_repository()
     setup_dependencies()
     setup_pre_commit()
+    produce_first_commit()
