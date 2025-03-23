@@ -132,12 +132,20 @@ def setup_license() -> None:
             Path("LICENSE_GPL").unlink()
             Path("LICENSE_MIT").unlink()
 
+postgres_enabled = {% if cookiecutter.persistence_component %} True {% else %} False {% endif %}
+
+def setup_docker_compose() -> None:
+    if not postgres_enabled:
+        shutil.rmtree(Path(".docker/pgadmin"))
+    if not sample_project_enabled:
+        Path("docker.env").unlink()
 
 if __name__ == "__main__":
     setup_repository()
     setup_dependencies()
     setup_pre_commit()
     rm_sample_components()
+    setup_docker_compose()
     setup_license()
     produce_first_commit()
     setup_local_env()

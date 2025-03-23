@@ -8,5 +8,10 @@
   "license": ["GPL-3.0", "MIT", "Proprietary"],
   "sample_project": true,
   "persistence_component": true,
-  "pyright": ["basedpyright", "pyright"]
+  "pyright": ["basedpyright", "pyright"],
+  "docker_compose_postgres": true,
+  "docker_compose_redis": false,
+  "docker_compose_minio": false,
+  "docker_compose_rabbitmq": false,
+  "docker_compose_kafka": false
 }
