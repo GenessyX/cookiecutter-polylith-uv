@@ -1,4 +1,5 @@
 from pathlib import Path
+import shutil
 import sys
 import subprocess
 import logging
@@ -98,12 +99,12 @@ def setup_local_env() -> None:
 
 def rm_sample_components() -> None:
     if not sample_project_enabled:
-        Path("bases/{{ cookiecutter.project_slug }}/api").rmdir()
-        Path("projects/{{ cookiecutter.project_slug }}/api").rmdir()
+        shutil.rmtree(Path("bases/{{ cookiecutter.project_slug }}/api"))
+        shutil.rmtree(Path("projects/{{ cookiecutter.project_slug }}/api"))
     if not persistence_component_enabled:
-        Path("components/{{ cookiecutter.project_slug }}/persistence").rmdir()
+        shutil.rmtree( Path("components/{{ cookiecutter.project_slug }}/persistence"))
     if not sample_project_enabled and not persistence_component_enabled:
-        Path("components/{{ cookiecutter.project_slug }}/settings").rmdir()
+        shutil.rmtree(Path("components/{{ cookiecutter.project_slug }}/settings"))
 
 if __name__ == "__main__":
     setup_repository()
