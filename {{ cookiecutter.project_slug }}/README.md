@@ -1,5 +1,18 @@
 # {{ cookiecutter.project_name }}
 
+{%- if cookiecutter.sample_project %}
+## project run
+
+uvicorn:
+```bash
+uv run python projects/api/run.py
+```
+granian:
+```bash
+WEB_SERVER=granian uv run python projects/api/run.py
+```
+{%- endif %}
+
 ## project build
 
 ```bash
