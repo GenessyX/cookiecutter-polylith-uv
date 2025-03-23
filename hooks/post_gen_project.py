@@ -115,7 +115,7 @@ def rm_sample_components() -> None:
         shutil.rmtree(Path("components/{{ cookiecutter.project_slug }}/settings"))
 
 License = Literal["GPL-3.0", "MIT", "Proprietary"]
-license: License = {% if cookiecutter.license == "GPL-3.0" %} "GPL-3.0" {% elif cookiecutter.license == "MIT" %} "MIT" {% else %} "Proprietary"
+license: License = {% if cookiecutter.license == "GPL-3.0" %} "GPL-3.0" {% elif cookiecutter.license == "MIT" %} "MIT" {% else %} "Proprietary" {% endif %}
 
 def setup_license() -> None:
     match license:
