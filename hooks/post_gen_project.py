@@ -45,7 +45,15 @@ def setup_pre_commit() -> None:
 
 def produce_first_commit() -> None:
     try:
-        result = subprocess.run(["git", "commit", "-m", "chore: first commit"])
+        result = subprocess.run(["git", "add", "."], capture_output=True, check=True)
+        logger.info(
+            "Added all files to first commit: %s", result.stdout.decode("utf-8")
+        )
+        result = subprocess.run(
+            ["git", "commit", "-m", "chore: first commit"],
+            capture_output=True,
+            check=True,
+        )
         logger.info("Produced first commit: %s", result.stdout.decode("utf-8"))
     except Exception:
         logger.exception("Failed to produce first commit")
