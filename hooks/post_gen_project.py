@@ -51,9 +51,9 @@ def produce_first_commit() -> None:
             "Added all files to first commit: %s", result.stdout.decode("utf-8")
         )
         result = subprocess.run(
-            ["uv", "run", "pre-commit", "run", "--all-files", "||", "true"],
+            ["uv", "run", "pre-commit", "run", "--all-files"],
             capture_output=True,
-            check=True,
+            check=False,
         )
         logger.info("Ran pre-commit on repo: %s", result.stdout.decode("utf-8"))
         result = subprocess.run(["git", "add", "."], capture_output=True, check=True)
