@@ -51,6 +51,7 @@ repos:
         {% endif %}
         {% if cookiecutter.persistence_component %}
           - sqlalchemy
+          - alembic
         {% endif %}
 
   - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
