@@ -9,6 +9,8 @@ logging.basicConfig(level=logging.INFO)
 
 def setup_repository() -> None:
     try:
+        result = subprocess.run(["git", "init"], capture_output=True, check=True)
+        logger.info("Set up repository: %s", result.stdout.decode("utf-8"))
         subprocess.run(
             ["git", "config", "user.email", "{{ cookiecutter.author_email }}"],
             capture_output=True,
@@ -19,8 +21,6 @@ def setup_repository() -> None:
             capture_output=True,
             check=True,
         )
-        result = subprocess.run(["git", "init"], capture_output=True, check=True)
-        logger.info("Set up repository: %s", result.stdout.decode("utf-8"))
     except Exception:
         logger.exception("Failed to set up repository")
         sys.exit(1)
