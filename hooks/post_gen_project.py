@@ -16,11 +16,8 @@ def setup_repository() -> None:
 
 def setup_dependencies() -> None:
     try:
-        result = subprocess.run(["uv", "sync", "--all-groups"])
-        print(result)
-        print(result.stdout)
-        print(result.stderr)
-        logger.info("Synced dependencies: %s", result.stdout.decode("utf-8"))
+        subprocess.run(["uv", "sync", "--all-groups"])
+        logger.info("Successfuly synced dependencies")
     except Exception:
         logger.exception("Failed to sync dependencies")
         sys.exit(1)
