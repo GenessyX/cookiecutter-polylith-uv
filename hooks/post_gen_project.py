@@ -38,12 +38,6 @@ def setup_pre_commit() -> None:
         logger.info(
             "Set up commit-msg pre-commit hooks: %s", result.stdout.decode("utf-8")
         )
-        result = subprocess.run(
-            ["uv", "run", "pre-commit", "run", "--all-files"],
-            capture_output=True,
-            check=True,
-        )
-        logger.info("Ran pre-commit on repo: %s", result.stdout.decode("utf-8"))
 
     except Exception:
         logger.exception("Failed to set up pre-commit hooks")
@@ -56,6 +50,12 @@ def produce_first_commit() -> None:
         logger.info(
             "Added all files to first commit: %s", result.stdout.decode("utf-8")
         )
+        result = subprocess.run(
+            ["uv", "run", "pre-commit", "run", "--all-files"],
+            capture_output=True,
+            check=True,
+        )
+        logger.info("Ran pre-commit on repo: %s", result.stdout.decode("utf-8"))
         result = subprocess.run(
             ["git", "commit", "-m", "chore: first commit"],
             capture_output=True,
