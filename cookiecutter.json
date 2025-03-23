@@ -5,5 +5,5 @@
   "author": "Anonymous",
   "author_email": "email@example.com",
   "python_version": "3.12.6",
-  "license": ["MIT", "GPL-3.0", "Proprietary"]
+  "license": ["GPL-3.0", "MIT", "Proprietary"]
 }
