@@ -88,12 +88,22 @@ def produce_first_commit() -> None:
         sys.exit(1)
 
 sample_project_enabled = {% if cookiecutter.sample_project %} True {% else %} False {% endif %}
+persistence_component_enabled = {% if cookiecutter.persistence_component %} True {% else %} False {% endif %}
+
 
 def setup_local_env() -> None:
     if sample_project_enabled:
         with Path("bases/{{ cookiecutter.project_slug }}/api/local.env").open("w"):
             pass
 
+def rm_sample_components() -> None:
+    if not sample_project_enabled:
+        Path("bases/{{ cookiecutter.project_slug }}/api").rmdir()
+        Path("projects/{{ cookiecutter.project_slug }}/api").rmdir()
+    if not persistence_component_enabled:
+        Path("components/{{ cookiecutter.project_slug }}/persistence").rmdir()
+    if not sample_project_enabled and not persistence_component_enabled:
+        Path("components/{{ cookiecutter.project_slug }}/settings").rmdir()
 
 if __name__ == "__main__":
     setup_repository()
