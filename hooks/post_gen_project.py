@@ -103,6 +103,9 @@ def rm_sample_components() -> None:
         shutil.rmtree(Path("projects/{{ cookiecutter.project_slug }}/api"))
     if not persistence_component_enabled:
         shutil.rmtree( Path("components/{{ cookiecutter.project_slug }}/persistence"))
+        if sample_project_enabled:
+            shutil.rmtree(Path("projects/{{ cookiecutter.project_slug }}/api/alembic"))
+            Path("projects/{{ cookiecutter.project_slug }}/api/alembic.ini").unlink()
     if not sample_project_enabled and not persistence_component_enabled:
         shutil.rmtree(Path("components/{{ cookiecutter.project_slug }}/settings"))
 
